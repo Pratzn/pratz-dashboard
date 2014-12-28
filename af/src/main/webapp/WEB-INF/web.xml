@@ -5,6 +5,18 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/spring/root-context.xml</param-value>
     </context-param>
+    
+    
+    <!-- Creates Filter -->
+    <filter>
+        <filter-name>sessionfiler</filter-name>
+        <filter-class>com.filter.SessionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>sessionfiler</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
     <!-- Creates the Spring Container shared by all Servlets and Filters -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
