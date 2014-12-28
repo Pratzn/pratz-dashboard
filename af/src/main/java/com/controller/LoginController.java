@@ -15,7 +15,7 @@ public class LoginController
 {
   private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
   
-  @RequestMapping(value={"/login.pratz"})
+  @RequestMapping(value={"/login"})
   public String login(@RequestParam(value="email", required=false) String email,@RequestParam(value="remember", required=false) String remember,@RequestParam(value="password", required=false) String password,ModelMap model,HttpSession session,HttpServletResponse response )
   {
       if("pratz.nud@gmail.com".equals(email) && "asdfasdf".equals(password)){
@@ -26,7 +26,7 @@ public class LoginController
               response.addCookie(c);
           }
           session.setAttribute("USER", "Pratz");
-          return "index";
+          return "home";
       }else{
           logger.error("Login fail!!");
           model.addAttribute("loginMsg", "Username or password has invalid.");

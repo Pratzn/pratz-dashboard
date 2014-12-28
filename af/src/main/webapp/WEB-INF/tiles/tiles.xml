@@ -13,10 +13,16 @@
 	<definition name="login" template="/WEB-INF/views/login.jsp">
 	</definition>
 
-	<definition name="index" extends="basic">
+	<definition name="home" extends="basic">
 		<put-attribute name="title" value="Home" />
 		<put-attribute name="screenName" value="Home" />
-		<put-attribute name="content" value="/WEB-INF/views/index.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/home.jsp" />
+	</definition>
+	
+	<definition name="upload-task" extends="basic">
+		<put-attribute name="title" value="upload-task" />
+		<put-attribute name="screenName" value="upload-task" />
+		<put-attribute name="content" value="/WEB-INF/views/upload-task.jsp" />
 	</definition>
 
 </tiles-definitions>
