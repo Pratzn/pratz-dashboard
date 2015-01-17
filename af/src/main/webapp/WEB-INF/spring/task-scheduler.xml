@@ -20,8 +20,8 @@
   <!-- Run every 5 seconds -->
   <task:scheduled-tasks>
 	<!--<task:scheduled ref="runScheduler1" method="run" cron="0 0 2 ? * MON-FRI" /> -->
-    <task:scheduled ref="runScheduler2" method="run" cron="0 0 1 ? * MON" />  
-       <!--      <task:scheduled ref="runScheduler2" method="run" cron="*/5 * * * * *" /> -->
+      <task:scheduled ref="runScheduler2" method="run" cron="0 0 1 ? * MON" /> 
+      <!--     <task:scheduled ref="runScheduler2" method="run" cron="*/5 * * * * *" />  -->
         <!-- 
             cron expression  :   description
             */5 * * * * *          every 5 second
