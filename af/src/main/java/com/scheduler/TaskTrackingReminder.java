@@ -23,11 +23,6 @@ public class TaskTrackingReminder {
 
 	private static final Logger logger = LoggerFactory.getLogger(TaskTrackingReminder.class);
 
-	/*public static void main(String args[]){
-		
-		new TaskTrackingReminder().run();
-	}
-	*/
 	public void run() {
 
         final String username = "prat@iconext.co.th";
@@ -61,7 +56,7 @@ public class TaskTrackingReminder {
             String fileName = "Task Tracking Report 2015_Mr.Prat.xls";
             File f = new File(System.getProperty("java.io.tmpdir")+ "tmp.xls");
             f.deleteOnExit();
-            FileUtils.copyURLToFile(new URL("http://pratz.ap01.aws.af.cm/uploaddata/Task%20Tracking%20Report%202015_Mr.Prat.xls"), f);       
+            FileUtils.copyURLToFile(new URL("http://pratz.ap01.aws.af.cm/resources/Task%20Tracking%20Report%202015_Mr.Prat.xls"), f);       
             DataSource source = new FileDataSource(f);
             messageBodyPart.setDataHandler(new DataHandler(source));
             messageBodyPart.setFileName(fileName);
