@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Pratz's Dashborad">
         <meta name="author" content="Pratz">
-        <title>:Dashboard:<tiles:getAsString name="title" /></title>
+        <title>Pratz's Dashboard - <tiles:getAsString name="title" /></title>
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
         <link href="resources/css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
         <link href="resources/css/sb-admin-2.css" rel="stylesheet">
