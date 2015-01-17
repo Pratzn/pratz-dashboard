@@ -24,6 +24,7 @@ public class SessionFilter implements Filter {
         this.config = filterConfig;
         exceptionPage = new ArrayList();
         exceptionPage.add("/login");
+        exceptionPage.add("/resources");
     }
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
