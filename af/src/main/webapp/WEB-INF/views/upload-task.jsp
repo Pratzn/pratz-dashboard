@@ -9,5 +9,5 @@ Select a file to upload:
 		type="submit" value="Upload File" />
 </form>
 <br />
-<a href="http://pratz.ap01.aws.af.cm/uploaddata/Task Tracking Report 2014_Mr.Prat.xls">Task
-	Tracking Report 2014_Mr.Prat.xls</a>
+<a href="http://pratz.ap01.aws.af.cm/resources/Task Tracking Report 2015_Mr.Prat.xls">Task
+	Tracking Report 2015_Mr.Prat.xls</a>
