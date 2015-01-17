@@ -16,7 +16,7 @@ public class LoginController
   private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
   
   @RequestMapping(value={"/login"})
-  public String login(@RequestParam(value="email", required=false) String email,@RequestParam(value="remember", required=false) String remember,@RequestParam(value="password", required=false) String password,ModelMap model,HttpSession session,HttpServletResponse response )
+  public String login(@RequestParam(value="error", required=false) String error,@RequestParam(value="email", required=false) String email,@RequestParam(value="remember", required=false) String remember,@RequestParam(value="password", required=false) String password,ModelMap model,HttpSession session,HttpServletResponse response )
   {
       if("pratz.nud@gmail.com".equals(email) && "asdfasdf".equals(password)){
           logger.info("Welcome pratz!");
@@ -28,8 +28,13 @@ public class LoginController
           session.setAttribute("USER", "Pratz");
           return "home";
       }else{
-          logger.error("Login fail!!");
-          model.addAttribute("loginMsg", "Username or password has invalid.");
+    	  if(error==null){
+    		logger.error("Login fail!!");
+          	model.addAttribute("loginMsg", "Username or password has invalid.");
+          }else{
+        	  logger.error("error parameter found");
+        	  model.addAttribute("loginMsg", "Username or password has invalid.");
+          }
           return "login";
       }
   }

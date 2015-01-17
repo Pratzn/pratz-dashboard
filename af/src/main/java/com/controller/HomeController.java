@@ -103,27 +103,27 @@ public class HomeController {
 							// Write the file
 							if (fileName.lastIndexOf("\\") >= 0) {
 								file = new File(filePath
-										+ "/uploaddata/"
+										+ "/resources/"
 										+ fileName.substring(fileName
 												.lastIndexOf("\\")));
 							} else {
 								file = new File(filePath
-										+ "/uploaddata/"
+										+ "/resources/"
 										+ fileName.substring(fileName
 												.lastIndexOf("\\") + 1));
 							}
 							fi.write(file);
 							out.println("Uploaded Filename: " + filePath
-									+ "/uploaddata/" + fileName + "<br>");
+									+ "/resources/" + fileName + "<br>");
 							out.println("Access via : <a href=\""
 									+ request.getScheme() + "://"
 									+ request.getServerName() + ":"
 									+ request.getServerPort()
-									+ request.getContextPath() + "/uploaddata/"
+									+ request.getContextPath() + "/resources/"
 									+ fileName + "\">" + request.getScheme()
 									+ "://" + request.getServerName() + ":"
 									+ request.getServerPort()
-									+ request.getContextPath() + "/uploaddata/"
+									+ request.getContextPath() + "/resources/"
 									+ fileName + "</a>");
 						}
 					}
