@@ -22,7 +22,7 @@
   <task:scheduled-tasks>
 	<!--<task:scheduled ref="runScheduler1" method="run" cron="0 0 2 ? * MON-FRI" /> -->
       <task:scheduled ref="runScheduler1" method="run" cron="0 0 1 ? * MON" /> 
-      <task:scheduled ref="runScheduler1" method="run2" cron="0 0 8 ? 1/1 MON#1" /> 
+      <task:scheduled ref="runScheduler1" method="run2" cron="0 0 8 ? 1/1 2#1" /> 
       
       
       <!--     <task:scheduled ref="runScheduler2" method="run" cron="*/5 * * * * *" />  -->
