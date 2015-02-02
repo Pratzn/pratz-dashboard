@@ -16,18 +16,13 @@
    
    <!--   <bean id="runScheduler1" class="com.scheduler.LeaveRequestReminder"></bean> -->
      <bean id="runScheduler1" class="com.scheduler.TaskTrackingReminder">
-     	<property name="receivedMailList" value="parkpoom@iconext.co.th,paitoon@iconext.co.th,alisa@iconext.co.th,ploypapas@iconext.co.th,phairat@iconext.co.th,saowapa@iconext.co.th,pattarin@iconext.co.th,prat@iconext.co.th,pratz.nud@gmail.com"></property>
      </bean>
-     
-      <bean id="runScheduler2" class="com.scheduler.TaskTrackingReminder">
-     	<property name="receivedMailList" value="pasuwat@iconext.co.th,pratz.nud@gmail.com"></property>
-     </bean>
- 
+
   <!-- Run every 5 seconds -->
   <task:scheduled-tasks>
 	<!--<task:scheduled ref="runScheduler1" method="run" cron="0 0 2 ? * MON-FRI" /> -->
       <task:scheduled ref="runScheduler1" method="run" cron="0 0 1 ? * MON" /> 
-      <task:scheduled ref="runScheduler2" method="run" cron="0 0 8 ? 1/1 MON#1" /> 
+      <task:scheduled ref="runScheduler1" method="run2" cron="0 0 8 ? 1/1 MON#1" /> 
       
       
       <!--     <task:scheduled ref="runScheduler2" method="run" cron="*/5 * * * * *" />  -->
