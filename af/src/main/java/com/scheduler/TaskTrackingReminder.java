@@ -24,6 +24,8 @@ public class TaskTrackingReminder {
 
 	private static final Logger logger = LoggerFactory.getLogger(TaskTrackingReminder.class);
 
+	private String receivedMailList;
+	
 	public void run() {
 
 		final String username = "prat@iconext.co.th";
@@ -48,7 +50,7 @@ public class TaskTrackingReminder {
 
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("prat@iconext.co.th"));
-			message.setRecipients(Message.RecipientType.TO,InternetAddress.parse("parkpoom@iconext.co.th,paitoon@iconext.co.th,alisa@iconext.co.th,ploypapas@iconext.co.th,phairat@iconext.co.th,saowapa@iconext.co.th,pattarin@iconext.co.th,prat@iconext.co.th,pratz.nud@gmail.com"));
+			message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(getReceivedMailList()));
 			//message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("prat@iconext.co.th"));
 			message.setSubject("Task Tracking Report 2015_Pratz");
 			MimeBodyPart messageBodyPart = new MimeBodyPart();
@@ -73,6 +75,16 @@ public class TaskTrackingReminder {
 		} catch (Exception e) {
 			logger.error("MessagingException", e);
 		}
+	}
+
+	private String getReceivedMailList() {
+
+		return receivedMailList;
+	}
+
+	private void setReceivedMailList(String receivedMailList) {
+
+		this.receivedMailList = receivedMailList;
 	}
 
 }
