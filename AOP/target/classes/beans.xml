@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Advices -->
+	<bean id="beforeCall"
+		class="org.pratz.aop.LogBeforeCallAdvice" />
+
+	<bean id="afterCall"
+		class="org.pratz.aop.LogAfterReturningAdvice" />
+
+	<bean id="throwCall"
+		class="org.pratz.aop.LogAfterThrowsAdvice" />
+
+	<bean id="aroundCall"
+		class="org.pratz.aop.LogAroundAdvice" />
+
+	<!-- Implementation Class -->
+	<bean id="adderImpl" class="org.pratz.aop.AdderImpl" />
+
+	<!-- Proxy Implementation Class -->
+	<bean id="adder" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.pratz.aop.Adder</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>beforeCall</value>
+				<value>afterCall</value>
+				<value>throwCall</value>
+				<value>aroundCall</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="adderImpl" />
+		</property>
+	</bean>
+</beans>
