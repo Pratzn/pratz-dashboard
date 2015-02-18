@@ -4,8 +4,11 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailParseException;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -17,55 +20,56 @@ public class MailSenderService {
 
 	@Autowired
 	private JavaMailSenderImpl javaMailSenderImpl;
+	
+	private String emailFolder;//path
 
 	public final void setJavaMailSenderImpl(
 			JavaMailSenderImpl javaMailSenderImpl) {
 		this.javaMailSenderImpl = javaMailSenderImpl;
 	}
 
-	public void sendMail(String from, String to, String subject, String contents, MultipartFile file) throws IOException {
-
+	public void sendMail(String from, String to, String subject, String contents, MultipartFile[] files) throws IOException {
+		//String path = System.getProperty("java.io.tmpdir");
+		String path = "C:\\Users\\prat\\Desktop\\TestFile\\TTFL E-mail Temp Folder\\";
 		MimeMessage message = javaMailSenderImpl.createMimeMessage();
-		
-		String path = System.getProperty("java.io.tmpdir")
-				+ file.getOriginalFilename() + System.currentTimeMillis();
-		System.out.println(path);
-		File tempEmail = new File(path);
-		// tempEmail.
-		
-			byte[] bytes = file.getBytes();
-			BufferedOutputStream stream = new BufferedOutputStream(
-					new FileOutputStream(new File(path)));
-			stream.write(bytes);
-			stream.close();
-			System.out.println(tempEmail.exists());
-			System.out.println(tempEmail.isFile());
-			System.out.println(tempEmail.canRead());
-
-			tempEmail.deleteOnExit();
-
 		try {
-
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
-
 			helper.setFrom(from);
-
 			helper.setTo(to);
-
 			helper.setSubject(subject);
-
 			helper.setText(contents);
-			System.out.println(tempEmail.getName());
-			helper.addAttachment(tempEmail.getName(), tempEmail);
-
+			String tempFolder = from+System.currentTimeMillis();
+			File folder = new File(path+tempFolder);
+			folder.mkdir();
+			folder.deleteOnExit();
+			for(int i = 0 ; i < files.length ; i++){
+				MultipartFile file = files[i];
+					String filePath = path+tempFolder+"\\"+file.getOriginalFilename();
+					File fileAttach = new File(filePath);
+					byte[] bytes = file.getBytes();
+					BufferedOutputStream stream = new BufferedOutputStream(
+							new FileOutputStream(fileAttach));
+					stream.write(bytes);
+					stream.close();
+					System.out.println(fileAttach.exists());
+					System.out.println(fileAttach.isFile());
+					System.out.println(fileAttach.canRead());
+					fileAttach.deleteOnExit();
+					helper.addAttachment(file.getOriginalFilename(), fileAttach);
+			}
+			javaMailSenderImpl.send(message);
+			FileUtils.deleteDirectory(folder);
 		} catch (MessagingException e) {
-
 			throw new MailParseException(e);
-
 		}
-
-		javaMailSenderImpl.send(message);
-
 	}
+
+	public final void setEmailFolder(String emailFolder) {
+		this.emailFolder = emailFolder;
+	}
+
+	
+
+
 
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/pratz")
 public class PratzController {
 	
-	@RequestMapping(value="/", method = RequestMethod.GET)
+	@RequestMapping(value={"/","/pratz"}, method = RequestMethod.GET)
     public String pratz(Model model) {
 		model.addAttribute("test", "pratz method");
         return "pratz";

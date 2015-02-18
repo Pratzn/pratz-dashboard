@@ -10,7 +10,7 @@
 	<form method="POST" enctype="multipart/form-data"
 		action="${pageContext.request.contextPath}/upload">
 		File to upload: <input type="file" name="file"><br /> Name: <input
-			type="text" name="name"><br /> <br /> <input type="submit"
+			type="text" name="name"><br /> <input type="file" name="file2"><br /> <input type="submit"
 			value="Upload"> Press here to upload the file!
 	</form>
 </body>
