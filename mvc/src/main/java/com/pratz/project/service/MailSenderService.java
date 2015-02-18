@@ -15,12 +15,13 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+
 @Component
 public class MailSenderService {
 
 	@Autowired
 	private JavaMailSenderImpl javaMailSenderImpl;
-	
+
 	private String workspaceFolder;
 
 	public final void setJavaMailSenderImpl(
@@ -28,8 +29,9 @@ public class MailSenderService {
 		this.javaMailSenderImpl = javaMailSenderImpl;
 	}
 
-	public void sendMail(String from, String to, String subject, String contents, MultipartFile[] multipartFiles) throws IOException {
-		//String workspaceFolder = System.getProperty("java.io.tmpdir");
+	public void sendMail(String from, String to, String subject,
+			String contents, MultipartFile[] multipartFiles) throws IOException {
+		// String workspaceFolder = System.getProperty("java.io.tmpdir");
 		workspaceFolder = "C:\\Users\\prat\\Desktop\\TestFile\\TTFL E-mail Temp Folder\\";
 		MimeMessage message = javaMailSenderImpl.createMimeMessage();
 		try {
@@ -38,24 +40,26 @@ public class MailSenderService {
 			helper.setTo(to);
 			helper.setSubject(subject);
 			helper.setText(contents);
-			String tempFolder = from+System.currentTimeMillis();
-			File folder = new File(workspaceFolder+tempFolder);
+			String tempFolder = from + System.currentTimeMillis();
+			File folder = new File(workspaceFolder + tempFolder);
 			folder.mkdir();
 			folder.deleteOnExit();
-			for(int i = 0 ; i < multipartFiles.length ; i++){
-				MultipartFile file = multipartFiles[i];
-					String filePath = folder+"\\"+file.getOriginalFilename();
-					File fileAttach = new File(filePath);
-					byte[] bytes = file.getBytes();
-					BufferedOutputStream stream = new BufferedOutputStream(
-							new FileOutputStream(fileAttach));
-					stream.write(bytes);
-					stream.close();
-					System.out.println(fileAttach.exists());
-					System.out.println(fileAttach.isFile());
-					System.out.println(fileAttach.canRead());
-					fileAttach.deleteOnExit();
-					helper.addAttachment(file.getOriginalFilename(), fileAttach);
+			for (int i = 0; i < multipartFiles.length; i++) {
+				MultipartFile multipartFile = multipartFiles[i];
+				String multipartFileFilePath = workspaceFolder + tempFolder
+						+ "\\" + multipartFile.getOriginalFilename();
+				File tempMultipartFile = new File(multipartFileFilePath);
+				byte[] bytes = multipartFile.getBytes();
+				BufferedOutputStream stream = new BufferedOutputStream(
+						new FileOutputStream(tempMultipartFile));
+				stream.write(bytes);
+				stream.close();
+				System.out.println(tempMultipartFile.exists());
+				System.out.println(tempMultipartFile.isFile());
+				System.out.println(tempMultipartFile.canRead());
+				tempMultipartFile.deleteOnExit();
+				helper.addAttachment(multipartFile.getOriginalFilename(),
+						tempMultipartFile);
 			}
 			javaMailSenderImpl.send(message);
 			FileUtils.deleteDirectory(folder);
@@ -67,9 +71,5 @@ public class MailSenderService {
 	public final void setEmailFolder(String emailFolder) {
 		this.workspaceFolder = emailFolder;
 	}
-
-	
-
-
 
 }
