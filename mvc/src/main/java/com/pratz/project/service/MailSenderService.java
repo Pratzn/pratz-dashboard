@@ -21,16 +21,16 @@ public class MailSenderService {
 	@Autowired
 	private JavaMailSenderImpl javaMailSenderImpl;
 	
-	private String emailFolder;//path
+	private String workspaceFolder;
 
 	public final void setJavaMailSenderImpl(
 			JavaMailSenderImpl javaMailSenderImpl) {
 		this.javaMailSenderImpl = javaMailSenderImpl;
 	}
 
-	public void sendMail(String from, String to, String subject, String contents, MultipartFile[] files) throws IOException {
-		//String path = System.getProperty("java.io.tmpdir");
-		String path = "C:\\Users\\prat\\Desktop\\TestFile\\TTFL E-mail Temp Folder\\";
+	public void sendMail(String from, String to, String subject, String contents, MultipartFile[] multipartFiles) throws IOException {
+		//String workspaceFolder = System.getProperty("java.io.tmpdir");
+		workspaceFolder = "C:\\Users\\prat\\Desktop\\TestFile\\TTFL E-mail Temp Folder\\";
 		MimeMessage message = javaMailSenderImpl.createMimeMessage();
 		try {
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -39,12 +39,12 @@ public class MailSenderService {
 			helper.setSubject(subject);
 			helper.setText(contents);
 			String tempFolder = from+System.currentTimeMillis();
-			File folder = new File(path+tempFolder);
+			File folder = new File(workspaceFolder+tempFolder);
 			folder.mkdir();
 			folder.deleteOnExit();
-			for(int i = 0 ; i < files.length ; i++){
-				MultipartFile file = files[i];
-					String filePath = path+tempFolder+"\\"+file.getOriginalFilename();
+			for(int i = 0 ; i < multipartFiles.length ; i++){
+				MultipartFile file = multipartFiles[i];
+					String filePath = folder+"\\"+file.getOriginalFilename();
 					File fileAttach = new File(filePath);
 					byte[] bytes = file.getBytes();
 					BufferedOutputStream stream = new BufferedOutputStream(
@@ -65,7 +65,7 @@ public class MailSenderService {
 	}
 
 	public final void setEmailFolder(String emailFolder) {
-		this.emailFolder = emailFolder;
+		this.workspaceFolder = emailFolder;
 	}
 
 	
