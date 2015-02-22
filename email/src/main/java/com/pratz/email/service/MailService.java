@@ -35,6 +35,7 @@ private static final String templateName="template.ftl";
 			helper.setTo(to);
 			helper.setSubject(subject);
 			helper.setPriority(1);
+			
 			try{
 				Map<String,String> templateVars = new  HashMap<String,String>();
 				templateVars.put("name", "Pratz");
