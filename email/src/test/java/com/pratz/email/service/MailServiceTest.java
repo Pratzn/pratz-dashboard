@@ -43,8 +43,9 @@ public class MailServiceTest {
 	@Test
 	public void test1() throws MessagingException, IOException {
 		log("test1");
-		mailService.sendMail("pratz@localhost", "pratz@localhost", "subject",
+		mailService.sendMail("from@localhost", "to@localhost", "subject",
 				"contents");
+		
 
 		MimeMessage[] mineMessages = greenMail.getReceivedMessages();
 		for (MimeMessage mimeMessage : mineMessages) {
@@ -52,6 +53,12 @@ public class MailServiceTest {
 			log("   from : ");
 			Address[] from = mimeMessage.getFrom();
 			for (Address address : from) {
+				log("                " + address.toString());
+			}
+			
+			Address[] to =mimeMessage.getAllRecipients();
+			log("   to : ");
+			for (Address address : to) {
 				log("                " + address.toString());
 			}
 			log("   subject : " + mimeMessage.getSubject());

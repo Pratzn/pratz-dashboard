@@ -3,18 +3,24 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-	<!-- Test mail server. -->
+	
+	<!-- MailService -->
+	<bean class="com.pratz.email.service.MailService"></bean>
+	
+	<!-- Greenmail SMTP Mail server -->
 	<bean id="greenMail" class="com.icegreen.greenmail.util.GreenMail">
 		<constructor-arg ref="smtpServer"></constructor-arg>
 		<property name="users">
 			<props>
 				<prop key="pratz@localhost">pass</prop>
+				<prop key="from@localhost">pass</prop>
+				<prop key="to1@localhost">pass</prop>
+				<prop key="to2@localhost">pass</prop>
 			</props>
 		</property>
 	</bean>
 
-	<!-- JavaMailSender -->
+	<!-- JavaMailSenderImpl -->
 	<bean class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="localhost" />
 		<property name="port" value="25" />
@@ -29,17 +35,19 @@
 		</property>
 	</bean>
 
+	<!-- ServerSetup for Greenmail configuration -->
 	<bean id="smtpServer" class="com.icegreen.greenmail.util.ServerSetup">
 		<constructor-arg index="0" value="25" />
 		<constructor-arg index="1" value="localhost" />
 		<constructor-arg index="2" value="smtp" />
 	</bean>
 
-<bean id="freemarkerConfiguration"
+	<!-- freemaker engine for email content -->
+	<bean id="freemarkerConfiguration"
 		class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
-		<property name="templateLoaderPath" value="classpath:/"/>
+		<property name="templateLoaderPath" value="classpath:/" />
 	</bean>
 
-<bean class="com.pratz.email.service.MailService"></bean>
+	
 
 </beans>
