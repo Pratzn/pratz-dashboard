@@ -54,7 +54,7 @@ public class TaskTrackingReminder {
 
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("prat@iconext.co.th"));
-			message.setRecipients(Message.RecipientType.TO,InternetAddress.parse("parkpoom@iconext.co.th,paitoon@iconext.co.th,alisa@iconext.co.th,ploypapas@iconext.co.th,phairat@iconext.co.th,saowapa@iconext.co.th,pattarin@iconext.co.th,prat@iconext.co.th,pratz.nud@gmail.com"));
+			message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(mailList));
 			//message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("prat@iconext.co.th"));
 			message.setSubject("Task Tracking Report 2015_Pratz");
 			MimeBodyPart messageBodyPart = new MimeBodyPart();
