@@ -4,6 +4,7 @@ package com.scheduler;
 import java.io.File;
 import java.net.URL;
 import java.util.Properties;
+
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -16,13 +17,18 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 public class TaskTrackingReminder {
 
 	private static final Logger logger = LoggerFactory.getLogger(TaskTrackingReminder.class);
+	
+	@Value("${mail.mailList}")
+	private String mailList;
 
 	public void run() {
 
