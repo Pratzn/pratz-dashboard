@@ -24,11 +24,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 
 public class TaskTrackingReminder {
+	public static void main(String args[]){
+		new TaskTrackingReminder().run();
+	}
 
 	private static final Logger logger = LoggerFactory.getLogger(TaskTrackingReminder.class);
 	
-	@Value("${mail.mailList}")
-	private String mailList;
+	@Value("${mail.mailList:prat@iconext.co.th}")
+	private String mailList="prat@iconext.co.th";
 
 	public void run() {
 

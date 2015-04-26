@@ -15,6 +15,7 @@
 	">
    
    <!--   <bean id="runScheduler1" class="com.scheduler.LeaveRequestReminder"></bean> -->
+     <context:annotation-config/>
      <bean id="runScheduler1" class="com.scheduler.TaskTrackingReminder">
      </bean>
 
@@ -29,7 +30,7 @@
         <!-- 
             cron expression  :   description
             */5 * * * * *          every 5 second
-            0 0 2 ? * MON          Every Monday weekly day
+            0 0 1 ? * MON          Every Monday weekly day
             0 0 9 ? * MON-FRI       Every Mon-Fri
         -->
      

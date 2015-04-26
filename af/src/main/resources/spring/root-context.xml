@@ -22,7 +22,7 @@
 		<jdbc:script location="classpath:db-schema.sql"/>
 	</jdbc:initialize-database>
         -->
-        <context:property-placeholder location="classpath:config/*.properties" />
+        <context:property-placeholder location="classpath:/config/*.properties" />
         <import resource="task-scheduler.xml"/>
         
         <!--import resource="security.xml"/-->
